@@ -60,8 +60,8 @@ var StartScene = cc.Scene.extend({
 
         if (INITIALIZED_START == false) {
             INITIALIZED_START = true;
-            // var layer = new MainSceneLayer();
-            var layer = new StartSceneLayer();
+            var layer = new MainSceneLayer();
+            // var layer = new StartSceneLayer();
             this.addChild(layer);
         }
     }

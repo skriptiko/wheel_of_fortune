@@ -6,8 +6,8 @@ var res = {
     wheelLayer2 : "res/wheel_layer_2.png",
     wheelLayer3 : "res/wheel_layer_3.png",
     startButton : "res/start_button.png",
-    buttonSpin : "res/button_spin.png",
-    buttonSpinDown : "res/button_spin_down.png",
+    buttonSpinNorm : "res/button_spin_norm.png",
+    buttonSpinSel : "res/button_spin_sel.png",
     logo : "res/logo.png",
 };
 

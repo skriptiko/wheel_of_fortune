@@ -5,12 +5,16 @@ var MainSceneLayer = cc.Layer.extend({
         this._super();
 
         var size = cc.winSize;
+        var startSpin = false;
+        var totalPoints = 0;
 
         var arrayPoints = [1000, 400, 800, 7000, 5000, 300, 2000, 100];
 
         var checkWinValue = function () {
-            var angle = wheele.rotation - 360 * Math.floor(wheele.rotation / 360);
+            var angle = wheelLayer1.rotation - 360 * Math.floor(wheelLayer1.rotation / 360);
             var section = Math.ceil(angle / 45);
+            totalPoints += arrayPoints[arrayPoints.length - section];
+            menuItem2.setString('TOTAL POINTS: ' + totalPoints);
      
         };
 
@@ -19,13 +23,12 @@ var MainSceneLayer = cc.Layer.extend({
             checkWinValue();
         };
 
-        var startSpin = false;
         var spin = function () {
             if (startSpin == true) return;
             startSpin = true;
             var actionCallFunc = cc.callFunc(onComplete, this);
             var action = new cc.EaseExponentialOut(new cc.RotateBy(2, (Math.random() * 360) + 180 ));
-            wheele.runAction(cc.sequence(action, actionCallFunc))
+            wheelLayer1.runAction(cc.sequence(action, actionCallFunc))
         };
 
         var bgc = new cc.Sprite(res.mainSceneBackground);
@@ -35,22 +38,48 @@ var MainSceneLayer = cc.Layer.extend({
         });
         this.addChild(bgc, 0);
 
-
-        var wheele = new cc.Sprite(res.wheelLayer2);
-        wheele.attr({
+        var wheelLayer1 = new cc.Sprite(res.wheelLayer1);
+        wheelLayer1.attr({
             x: size.width / 2,
             y: size.height / 2,
-            scale: 0.2
+            scale: 0.4
         });
-        this.addChild(wheele, 1);
+        this.addChild(wheelLayer1, 1);
 
+        var wheelLayer2 = new cc.Sprite(res.wheelLayer2);
+        wheelLayer2.attr({
+            x: size.width / 2,
+            y: size.height / 2,
+            scale: 0.9
+        });
+        this.addChild(wheelLayer2, 3);
 
-        console.log(cc)
+        var wheelLayer2 = new cc.Sprite(res.wheelLayer2);
+        wheelLayer2.attr({
+            x: size.width / 2,
+            y: size.height / 2,
+            scale: 0.9
+        });
+        this.addChild(wheelLayer2, 4);
 
-        var menuItem1 = new cc.MenuItemFont("Push", spin);
-        var menu = new cc.Menu(menuItem1);
-        menuItem1.setPosition(0, -300)
-        this.addChild(menu);
+        var wheelLayer2 = new cc.Sprite(res.wheelLayer3);
+        wheelLayer2.attr({
+            x: size.width / 2,
+            y: size.height / 2 + 22,
+            scale: 1.1
+        });
+        this.addChild(wheelLayer2, 5);
+
+        var menuItem1 = new cc.MenuItemImage(res.buttonSpinNorm, res.buttonSpinSel, spin);
+        var menuItem2 = new cc.MenuItemFont('TOTAL POINTS: ' + totalPoints);
+        menuItem1.scale = 1.1;
+        menuItem2.y = 400;
+        menuItem2.color = new cc.Color(232, 164, 70);
+
+        var menu = new cc.Menu(menuItem1, menuItem2);
+        this.addChild(menu, 6);
+
+        console.log(menuItem2)
 
         return true;
     }
