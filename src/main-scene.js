@@ -5,28 +5,58 @@ var MainSceneLayer = cc.Layer.extend({
         this._super();
 
         var size = cc.winSize;
-        // var helloLabel = new cc.LabelTTF("Hello World", "Arial", 38);
 
-        // helloLabel.x = size.width / 2;
-        // helloLabel.y = size.height / 2 + 200;
+        var arrayPoints = [1000, 400, 800, 7000, 5000, 300, 2000, 100];
 
-        // this.addChild(helloLabel, 5);
+        var checkWinValue = function () {
+            var angle = wheele.rotation - 360 * Math.floor(wheele.rotation / 360);
+            var section = Math.ceil(angle / 45);
+     
+        };
 
-        this.sprite = new cc.Sprite(res.mainSceneBackground);
-        this.sprite.attr({
+        var onComplete = function () {
+            startSpin = false;
+            checkWinValue();
+        };
+
+        var startSpin = false;
+        var spin = function () {
+            if (startSpin == true) return;
+            startSpin = true;
+            var actionCallFunc = cc.callFunc(onComplete, this);
+            var action = new cc.EaseExponentialOut(new cc.RotateBy(2, (Math.random() * 360) + 180 ));
+            wheele.runAction(cc.sequence(action, actionCallFunc))
+        };
+
+        var bgc = new cc.Sprite(res.mainSceneBackground);
+        bgc.attr({
             x: size.width / 2,
             y: size.height / 2
         });
-        this.addChild(this.sprite, 0);
+        this.addChild(bgc, 0);
+
+
+        var wheele = new cc.Sprite(res.wheelLayer2);
+        wheele.attr({
+            x: size.width / 2,
+            y: size.height / 2,
+            scale: 0.2
+        });
+        this.addChild(wheele, 1);
+
+
+        console.log(cc)
+
+        var menuItem1 = new cc.MenuItemFont("Push", spin);
+        var menu = new cc.Menu(menuItem1);
+        menuItem1.setPosition(0, -300)
+        this.addChild(menu);
 
         return true;
     }
 });
 
-var pop = function() {
-    INITIALIZED_MAIN = false;
-    cc.director.popScene();
-};
+
 
 var MainScene = cc.Scene.extend({
     onEnter:function () {

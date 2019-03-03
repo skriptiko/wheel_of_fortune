@@ -15,37 +15,44 @@ var StartSceneLayer = cc.Layer.extend({
         // this.addChild(helloLabel, 5);
 
         // add "HelloWorld" splash screen"
-        this.sprite = new cc.Sprite(res.startSceneBackground);
-        this.sprite.attr({
+
+        var onComplete = function () {
+            cc.director.runScene(new cc.TransitionFade(1, new MainScene()));
+        };
+
+        var play = function() {
+            var actionCallFunc = cc.callFunc(onComplete, this);
+            var action = new cc.EaseElasticOut(new cc.ScaleBy(0.8, 0.8, 0.8));
+            menuItem1.runAction(cc.sequence(action, actionCallFunc));
+            console.log(cc);
+        };
+
+        var bgc = new cc.Sprite(res.startSceneBackground);
+        bgc.attr({
             x: size.width / 2,
             y: size.height / 2
         });
 
-        console.log(this.sprite)
-        this.addChild(this.sprite, 0);
+        this.addChild(bgc, 0);
 
-        this.sprite = new cc.Sprite(res.logo);
-        this.sprite.attr({
+        var logo = new cc.Sprite(res.logo);
+        logo.attr({
             x: size.width / 2,
-            y: size.height / 2 + 200,
+            y: size.height / 2 + 180,
             scale: 1.2
         });
-        this.addChild(this.sprite, 1);
+        this.addChild(logo, 1);
 
-        var menuItem1 = new cc.MenuItemFont("START", play);
+        var menuItem1 = new cc.MenuItemImage(res.startButton, res.startButton, play);
+        menuItem1.setPosition(0, -180);
         var menu = new cc.Menu(menuItem1);
-        menu.alignItemsVertically();
         this.addChild(menu);
 
         return true;
     }
 });
 
-var play = function() {
-    var scene = new MainScene();
-    console.log(cc)
-    cc.director.runScene(new cc.TransitionFade(1.0, scene));
-};
+
 
 var StartScene = cc.Scene.extend({
     onEnter:function () {
@@ -53,6 +60,7 @@ var StartScene = cc.Scene.extend({
 
         if (INITIALIZED_START == false) {
             INITIALIZED_START = true;
+            // var layer = new MainSceneLayer();
             var layer = new StartSceneLayer();
             this.addChild(layer);
         }
