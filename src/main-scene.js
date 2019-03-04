@@ -8,6 +8,11 @@ var MainSceneLayer = cc.Layer.extend({
         var startSpin = false;
         var totalPoints = 0;
 
+        var sound = cc.audioEngine;
+        
+        // 
+        
+
         var arrayPoints = [1000, 400, 800, 7000, 5000, 300, 2000, 100];
 
         var checkWinValue = function () {
@@ -21,10 +26,12 @@ var MainSceneLayer = cc.Layer.extend({
         var onComplete = function () {
             startSpin = false;
             checkWinValue();
+            sound.end();
         };
 
         var spin = function () {
             if (startSpin == true) return;
+            sound.playEffect(res.rouletteSound);
             startSpin = true;
             var actionCallFunc = cc.callFunc(onComplete, this);
             var action = new cc.EaseExponentialOut(new cc.RotateBy(2, (Math.random() * 360) + 180 ));
