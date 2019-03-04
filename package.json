@@ -1,0 +1,28 @@
+{
+  "name": "wheel_of_fortune",
+  "version": "1.0.0",
+  "description": "Install modules:<br>",
+  "main": "main.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.13",
+    "mongoose": "^5.4.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skriptiko/wheel_of_fortune.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skriptiko/wheel_of_fortune/issues"
+  },
+  "homepage": "https://github.com/skriptiko/wheel_of_fortune#readme"
+}
