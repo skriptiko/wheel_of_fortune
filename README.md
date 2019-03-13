@@ -9,6 +9,9 @@ Install modules:<br>
 
 Run project in game directory:<br>
 
+### Status
+ Not completed
+
 ### `cocos run -p web`
 
 <!-- Run mongodb server:<br>
