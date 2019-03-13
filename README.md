@@ -9,10 +9,10 @@ Install modules:<br>
 
 Run project in game directory:<br>
 
+### `cocos run -p web`
+
 ### Status
  Not completed
-
-### `cocos run -p web`
 
 <!-- Run mongodb server:<br>
 Listener port: 8000<br>
